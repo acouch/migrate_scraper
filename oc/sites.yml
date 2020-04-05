@@ -1,0 +1,57 @@
+ocpl:
+  url: http://ocpl.org
+  file: sites/ocpl/ocpl.csv
+  rootMenu: http://www.ocpl.org/navdata/rootmenu49.xml
+  outputDir: sites/ocpl/data
+  transform: sites/ocpl/transform.yml
+  override: "OcplOverride"
+  fields:
+    title:
+      - h1
+    body:
+      - .html-width-default
+      - "#newsarticle"
+ocgov:
+  url: http://www.ocgov.com
+  file: sites/ocgov/ocgov.csv
+  rootMenu: http://www.ocgov.com/navdata/rootmenu.xml
+  topMenu:
+    -
+      title: "OC Home"
+      id: 1
+    -
+      title: "About the County"
+      id: 3
+    -
+      title: "Departments"
+      id: 4
+    -
+      title: "Business"
+      id: 5
+    -
+      title: "About the County"
+      id: 3
+    -
+      title: "How Do I"
+      id: 6
+    -
+      title: "Residents"
+      id: 7
+    -
+      title: "Services"
+      id: 8
+    -
+      title: "Visitors"
+      id: 9
+  outputDir: sites/ocgov/data
+  transform: sites/ocgov/transform.yml
+  filter: sites/ocgov/remove.yml
+  news: sites/ocgov/news.yml
+  override: "OcGovOverride"
+  fields:
+    title:
+      - h1
+    body:
+      - .html-width-default
+      - "#newsarticle"
+      - "#newsdetails"

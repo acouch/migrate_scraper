@@ -1,0 +1,24 @@
+-
+  type: news
+  url: /news/2020
+  id: ocnews-2020
+-
+  type: news
+  url: /news/2019
+  id: ocnews-2019
+-
+  type: news
+  url: /news/2018
+  id: ocnews-2018
+-
+  type: press release
+  url: /about/infooc/news/press/2020
+  id: ocpr-2020
+-
+  type: press release
+  url: /about/infooc/news/press/2019
+  id: ocpr-2019
+-
+  type: press release
+  url: /about/infooc/news/press/2018
+  id: ocpr-2018
