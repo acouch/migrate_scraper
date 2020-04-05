@@ -2,6 +2,8 @@
 
 This library is built to have a list of sites that are scraped and saved into JSON files. The intent is to use the JSON files for a migration into a CMS.
 
+This library is meant to be general and for use with any project that wants to migrate HTML into JSON. However some elements are custom to the original use case of Orange County.
+
 ## Installation
 
 ``composer install``
@@ -21,6 +23,8 @@ site_key: # id of the site
   file: # link to a file with list of URLs
   transform: # optional link to transform.yml file
   override: # optional link to override class
+  news: # optiona list of dynamic news pages
+  filter: # optional list of pages to ignore
   fields: # list of fields and html elements for domCrawler to select from.
     title:
       - h1.title
@@ -36,7 +40,7 @@ The menu is currently a separate migration. The menu scraper needs the following
 
 ```yml
 
-  rootMenu: http://www.ocpl.org/navdata/rootmenu49xml.js
+  rootMenu: http://www.ocpl.org/navdata/rootmenu49.xml
   topMenu:
 
 ```
