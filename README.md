@@ -8,6 +8,21 @@ This library is meant to be general and for use with any project that wants to m
 
 ``composer install``
 
+## Local Dev
+
+This has a local docker compose and ahoy setup added. To use [install ahoy](https://github.com/ahoy-cli/ahoy#installation) and use the following:
+
+```bash
+
+# start the container:
+ahoy up
+
+# run scrape
+ahoy dc php oc/run.php ocgov
+
+```
+
+
 ## Configuration
 
 ### sites.yml file
