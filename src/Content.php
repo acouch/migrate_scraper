@@ -112,7 +112,7 @@ class Content extends MigrateScraper {
 
   /**
    * Filters out items and reroutes for processing.
-   * 
+   *
    * @return bool
    *   TRUE if record should be filtered.
    */
@@ -210,7 +210,7 @@ class Content extends MigrateScraper {
    *   The css selector to get the body from.
    */
   private function getTag($tags, $transforms, $id, $crawler, $field = 'body') {
-    if ($transforms[$id]) {
+    if (isset($transforms[$id])) {
       foreach ($transforms[$id] as $transform) {
         if ($transform['type'] == 'tag' && $transform['field'] == $field) {
           $tag = $transform['tag'];
@@ -296,13 +296,16 @@ class Content extends MigrateScraper {
     // We want to retrieve files even if they are in another ocvgoc domain since
     // they are all the same cms.
     if ($parsed = parse_url($url)) {
-      $url = $parsed['path'] . '?' . $parsed['query'];
+      $query = isset($parsed['query']) ? $parsed['query'] : '';
+      $url = $parsed['path'] . '?' . $query;
     }
     $parts = explode('/', $url);
+    $one = isset($parts[1]) ? $parts[1] : FALSE;
+    $two = isset($parts[2]) ? $parts[2] : FALSE;
     // TODO: convert to regex.
-    if ($parts[1] == 'civicax' && $parts[2] == 'filebank' || $parts[2] == 'inc') {      
-      if (($id = str_replace('BlobID=', '', $parsed['query'])) || 
-      ($id = str_replace('blobID=', '', $parsed['query']))) {
+    if ($one == 'civicax' && $two == 'filebank' || $two == 'inc') {
+      if (($id = str_replace('BlobID=', '', $query)) ||
+      ($id = str_replace('blobID=', '', $query))) {
         return $id;
       }
       else {

@@ -81,12 +81,26 @@ class MigrateScraper {
   }
 
   /**
+   * Create directory if it doesn't exist from the filename.
+   */
+  public function createDir($filename) {
+    $dir = explode("/", $filename);
+    array_pop($dir);
+    $dir = implode("/", $dir);
+    $dirpath = $this->site['outputDir'] . '/' . $this->fileDir . '/' . $dir;
+    if (!is_dir($dirpath)) {
+      mkdir($dirpath, 0777, true);
+    }
+  }
+
+  /**
    * Write items to a file.
    */
   public function writeToJsonFile($items, $name) {
-    $fileName = $this->site['outputDir'] . '/' . $name;
+    $filename = $this->site['outputDir'] . '/' . $name;
     $json_data = json_encode($items, JSON_PRETTY_PRINT);
-    file_put_contents($fileName, $json_data);
+    $this->createDir($filename);
+    file_put_contents($filename, $json_data);
   }
 
   /**

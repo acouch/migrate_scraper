@@ -39,13 +39,13 @@ class File extends MigrateScraper {
     }
     else {
       if ($headers = $response->getHeaders()) {
-        $contentDisposition = $headers['content-disposition'];
-        $type = $headers['Content-Type'][0];
-        $length = $headers['Content-Length'][0];
+        $contentDisposition = isset($headers['content-disposition'][0]) ? $headers['content-disposition'][0] : FALSE;
+        $type = isset($headers['Content-Type'][0]) ? $headers['Content-Type'][0] : FALSE;
+        $length = isset($headers['Content-Length'][0]) ? $headers['Content-Length'][0] : FALSE;;
         $uuid = $this->createUuid();
         $extension = $this->extensionFromType($type);
         $filename = $id . '.' . $extension;
-        $name = $type == 'file' ? str_replace('inline;filename="', '', $contentDisposition[0]) : $filename;
+        $name = $type == 'file' && $contentDisposition ? str_replace('inline;filename="', '', $contentDisposition) : $filename;
         if (!$extension) {
           $this->errors[$id][] = "Could not find file extension for " . $id . " with content-type: " . $type . " from " . $url;
           $filename = $id;
@@ -173,19 +173,6 @@ class File extends MigrateScraper {
         ],
       ],
     ];
-  }
-
-  /**
-   * Create directory if it doesn't exist from the filename.
-   */
-  private function createDir($filename) {
-    $dir = explode("/", $filename);
-    array_pop($dir);
-    $dir = implode("/", $dir);
-    $dirpath = $this->site['outputDir'] . '/' . $this->fileDir . '/' . $dir;
-    if (!is_dir($dirpath)) {
-      mkdir($dirpath, 0777, true);
-    }
   }
 
   /**

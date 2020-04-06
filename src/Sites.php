@@ -20,7 +20,9 @@ class Sites {
   private function addFullDir($sites) {
     foreach ($sites as $id => $site) {
       foreach ($this->dirFields as $field) {
-        $sites[$id][$field] = $this->dir . $site[$field];
+        if (isset($site[$field])) {
+          $sites[$id][$field] = $this->dir . $site[$field];
+        }
       }
     }
 

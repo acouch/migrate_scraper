@@ -1,0 +1,22 @@
+version: '2.1'
+services:
+  cli:
+    environment:
+      DRUSH_ALLOW_XDEBUG: '0'
+      GIT_USER_EMAIL: acinternets@gmail.com
+      GIT_USER_NAME: acouch
+      XDEBUG_ENABLED: '0'
+    hostname: cli
+    image: docksal/cli:2.10-php7.3
+    volumes:
+    - cli_home:/home/docker:rw
+    - project_root:/var/www:rw,nocopy,cached
+volumes:
+  cli_home: {}
+  project_root:
+    driver: local
+    driver_opts:
+      device: /home/partisan/workshop/promet/orange/migrate_scraper
+      o: bind
+      type: none
+
